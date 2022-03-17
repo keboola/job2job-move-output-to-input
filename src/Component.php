@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace MyComponent;
 
 use Keboola\Component\BaseComponent;
-use project\Controller\TodoController;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Exception\IOException;
 
 class Component extends BaseComponent

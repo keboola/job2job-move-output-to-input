@@ -1,4 +1,4 @@
-# job2job-move-output-to-input
+# POC job2job-move-output-to-input
 
 Build https://github.com/keboola/job2job-move-output-to-input/actions
 
