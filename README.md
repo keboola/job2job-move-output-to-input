@@ -1,20 +1,14 @@
-# my-component
+# job2job-move-output-to-input
 
-[![Build Status](https://travis-ci.com/keboola/my-component.svg?branch=master)](https://travis-ci.com/keboola/my-component)
-
-> Fill in description
-
-# Usage
-
-> fill in usage instructions
+Build https://github.com/keboola/job2job-move-output-to-input/actions
 
 ## Development
  
 Clone this repository and init the workspace with following command:
 
 ```
-git clone https://github.com/keboola/my-component
-cd my-component
+git clone git@github.com:keboola/job2job-move-output-to-input.git
+cd job2job-move-output-to-input
 docker-compose build
 docker-compose run --rm dev composer install --no-scripts
 ```
