@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace MyComponent;
 
 use Keboola\Component\BaseComponent;
+use project\Controller\TodoController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class Component extends BaseComponent
 {
@@ -18,20 +20,15 @@ class Component extends BaseComponent
     private function moveOutputToInput(string $dataDir): void
     {
         // delete input
-        $fs = new Filesystem();
-        $structure = [
-            $dataDir . "/in/tables",
-            $dataDir . "/in/files",
-            $dataDir . "/in/user",
-            $dataDir . "/in",
-             //"/tmp",
-        ];
-        $finder = new Finder();
-        $finder->files()->in($structure);
-        $fs->remove($finder);
-        $fs->remove($structure);
+        $this->remove($dataDir . "/in/tables");
+        $this->remove($dataDir . "/in/files");
+        $this->remove($dataDir . "/in/user");
+        $this->remove($dataDir . "/in/user");
+        $this->remove($dataDir . "/in");
+        $this->remove("/tmp");
 
         // delete state file
+        $fs = new Filesystem();
         $fs->remove($dataDir . "/out/state.json");
         $fs->remove($dataDir . "/out/state.yml");
 
@@ -50,10 +47,19 @@ class Component extends BaseComponent
             $dataDir . "/out/tables",
             $dataDir . "/out/files",
             $dataDir . "/in/user",
-            // "/tmp",
+            "/tmp",
         ];
 
         $fs->mkdir($structure);
+    }
+
+    private function remove(string $path): void {
+        try {
+            (new Filesystem())->remove($path);
+        }
+        catch (IOException $e) {
+            $this->getLogger()->debug($e->getMessage());
+        }
     }
 
     protected function getConfigClass(): string
